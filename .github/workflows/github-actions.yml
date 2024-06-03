@@ -29,4 +29,3 @@ jobs:
         - name: dbt deploy
           run: dbt run --profiles-dir . --target prod --full-refresh
 
-          The workflow is not valid. .github/workflows/github-actions.yml (Line: 14, Col: 11): Unrecognized named-value: 'job'. Located at position 36 within expression: github.ref == 'refs/heads/main' && job.test.outcome == 'success'
