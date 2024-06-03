@@ -1,19 +1,24 @@
-name: Run
+name: Deploy dbt Project on Pull Request
+
 on:
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: fal-ai/dbt-cloud-action@main
-        id: dbt_cloud_run
-        with:
-          dbt_cloud_token: ${{ secrets.DBT_CLOUD_TOKEN }}
-          dbt_cloud_account_id: ${{ secrets.DBT_CLOUD_ACCOUNT_ID }}
-          dbt_cloud_job_id: ${{ secrets.DBT_CLOUD_JOB_ID }}
-          failure_on_error: true
-          steps_override: |
-            - dbt seed
-            - dbt run
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Trigger dbt Cloud job
+      env:
+        DBT_CLOUD_API_TOKEN: ${{ secrets.DBT_CLOUD_TOKEN }}
+      run: |
+        curl --request POST \
+          --url https://cloud.getdbt.com/api/v2/accounts/{70403103928636}/jobs/{70403103937410}/run/ \
+          --header "Authorization: Token $DBT_CLOUD_TOKEN" \
+          --header "Content-Type: application/json" \
+          --data '{"cause": "Triggered by GitHub Actions"}'
