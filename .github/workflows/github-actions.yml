@@ -10,7 +10,7 @@ jobs:
       - uses: fal-ai/dbt-cloud-action@main
         id: dbt_cloud_run
         with:
-          dbt_cloud_token: ${{ secrets.DBT_CLOUD_API_TOKEN }}
+          dbt_cloud_token: ${{ secrets.DBT_CLOUD_TOKEN }}
           dbt_cloud_account_id: ${{ secrets.DBT_CLOUD_ACCOUNT_ID }}
           dbt_cloud_job_id: ${{ secrets.DBT_CLOUD_JOB_ID }}
           failure_on_error: true
