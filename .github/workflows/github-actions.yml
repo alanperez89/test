@@ -1,33 +1,19 @@
-# This is a basic workflow to show using this action
-
-# name of the workflow
-name: test
-
-# Controls when the workflow will run
+name: Run dbt cloud
 on:
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab if needed
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
-  dbt_cloud_run:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Authenticate with dbt Cloud
-        uses: dbt-labs/dbt-cloud-auth@v2.0.0
+      - uses: fal-ai/dbt-cloud-action@main
+        id: dbt_cloud_run
         with:
-          dbt_cloud_api_token: ${{ secrets.DBT_CLOUD_API_TOKEN }}
+          dbt_cloud_token: ${{ secrets.DBT_CLOUD_API_TOKEN }}
           dbt_cloud_account_id: ${{ secrets.DBT_CLOUD_ACCOUNT_ID }}
-
-      - name: Trigger dbt Cloud Job
-        uses: alanperez89/test@v1.0.0
-        with:
-          dbt_cloud_job_id: ${{ secrets.DBT_CLOUD_JOB_ID }}  # Job ID from dbt Cloud
-          wait_for_job_completion: true
+          dbt_cloud_job_id: ${{ secrets.DBT_CLOUD_JOB_ID }}
+          failure_on_error: true
+          steps_override: |
+            - dbt seed
+            - dbt run
