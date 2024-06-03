@@ -1,31 +1,37 @@
-name: Deploy dbt
-run-name: ${{ github.actor }} is testing out GitHub Actions
-on: [push]
+# This is a basic workflow to show using this action
+
+# name of the workflow
+name: Check dbt Cloud Job Run Status
+
+# Controls when the workflow will run
+on:
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab if needed
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "This job's status is ${{ job.status }}."
 
-  deploy:
-      runs-on: ubuntu-latest
-      #needs: test    # Ensure tests pass before deploying
-      #if: github.ref == 'refs/heads/main' && job.test.outcome == 'success'  # Deploy only on successful tests in the main branch
+  # This workflow contains a single job called "retrieve_dbt_cloud_job_status"
+  retrieve_dbt_cloud_job_run_status:
+  
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
 
-      steps:
-        - uses: actions/checkout@v3
-        - name: Set up Python
-          uses: actions/setup-python@v4
-          with:
-            python-version: '3.x'
-        - name: Install dbt
-          run: pip install dbt-bigquery
-        - name: Set up Google Cloud Platform credentials
-          uses: google-github-actions/setup-gcloud@v1
-          with:
-            project_id: ${{ secrets.BIGQUERY_PROJECT_ID }}
-            service_account_key: ${{ secrets.BIGQUERY_SERVICE_ACCOUNT_KEY }}
-        - name: dbt deploy
-          run: dbt run --profiles-dir . --target prod --full-refresh
-
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Get dbt Cloud job run and return the status
+        id: get_job_run
+        uses: alanperez89/test
+        with:
+          dbt_cloud_token: ${{ secrets.DBT_CLOUD_TOKEN }}
+          dbt_cloud_account_id: ${{ secrets.DBT_CLOUD_ACCOUNT_ID }}
+          dbt_cloud_job_id: ${{ secrets.DBT_CLOUD_JOB_ID }}
