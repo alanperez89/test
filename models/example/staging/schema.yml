@@ -1,0 +1,62 @@
+version: 2
+
+models:
+    - name: dim_contact_detail
+      description: "Modelo que agrupa la informacion del contacto al usuario"
+      columns:
+          - name: contact_details_id
+            description: "Llave primaria generada"
+            tests:
+                - unique
+                - not_null
+          
+          - name: contact
+            description: "Forma de contacto para la encuesta"
+            tests:  
+                - accepted_values: 
+                    values: ['cellular', 'telephone', 'unknown']
+                - not_null
+
+          - name: month
+            description: "Mes del contacto"
+            tests:  
+                - accepted_values: 
+                    values: ['jan', 'feb', 'apr', 'mar','may','jun','jul','aug','sep','oct','nov','dec']
+                - not_null
+
+    - name: dim_customer_profile
+      description: "Modelo que agrupa la informacion del entrevistado"
+      columns:
+          - name: customer_profile_id
+            description: "Llave primaria generada"
+            tests:
+                - unique
+                - not_null
+          
+          - name: job
+            description: "Sector donde trabaja el entrevistado"
+            tests:  
+                - accepted_values: 
+                    values: ['admin.','unknown','unemployed','management','housemaid','entrepreneur','student','blue-collar','self-employed','retired','technician','services']
+                - not_null
+
+          - name: marital
+            description: "Estado marital del entrevistado NOTA: el estatus divorciado tambien incluye a los viudos"
+            tests:  
+                - accepted_values: 
+                    values: ['married','divorced','single']
+                - not_null
+
+          - name: education
+            description: "Grado de estudios del entrevistado"
+            tests:  
+                - accepted_values: 
+                    values: ['unknown','secondary','primary', 'tertiary']
+                - not_null
+
+          - name: poutcome
+            description: "Resultado de las campañas de marketing anteriores"
+            tests:  
+                - accepted_values: 
+                    values: ['unknown','other','failure', 'success']
+                - not_null
