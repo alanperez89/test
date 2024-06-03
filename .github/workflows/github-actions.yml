@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - alanperez89-patch-1
 
 jobs:
   deploy:
