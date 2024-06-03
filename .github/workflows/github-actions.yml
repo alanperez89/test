@@ -22,4 +22,4 @@ jobs:
           --url https://cloud.getdbt.com/api/v2/accounts/{70403103928636}/jobs/{70403103937422}/run/ \
           --header "Authorization: Token $DBT_CLOUD_TOKEN" \
           --header "Content-Type: application/json" \
-          --data '{"cause": "Triggered by GitHub Actions"}' #ok
+          --data '{"cause": "Triggered by GitHub Actions"}' 
