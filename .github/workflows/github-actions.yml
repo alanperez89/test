@@ -1,7 +1,7 @@
 # This is a basic workflow to show using this action
 
 # name of the workflow
-name: Check dbt Cloud Job Run Status
+name: test
 
 # Controls when the workflow will run
 on:
@@ -27,7 +27,7 @@ jobs:
           dbt_cloud_account_id: ${{ secrets.DBT_CLOUD_ACCOUNT_ID }}
 
       - name: Trigger dbt Cloud Job
-        uses: dbt-labs/run-dbt-cloud-job@v2.0.0
+        uses: alanperez89/test@v1.0.0
         with:
           dbt_cloud_job_id: ${{ secrets.DBT_CLOUD_JOB_ID }}  # Job ID from dbt Cloud
           wait_for_job_completion: true
