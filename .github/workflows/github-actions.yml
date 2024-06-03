@@ -19,7 +19,7 @@ jobs:
         DBT_CLOUD_TOKEN: ${{ secrets.DBT_CLOUD_TOKEN }}
       run: |
         curl --request POST \
-          --url https://cloud.getdbt.com/api/v2/accounts/{70403103928636}/jobs/{70403103937422}/run/ \
-          --header "Authorization: Bearer dbtu_YJFckJkHe1hif0WpkAkAWgkobJmUzU28u3FlL6kCsKtvTsflN8" \
+          --url https://ao028.us1.dbt.com/api/v2/accounts/70403103928636/jobs/70403103937422/run/ \
+          --header "Authorization: Token dbtu_YJFckJkHe1hif0WpkAkAWgkobJmUzU28u3FlL6kCsKtvTsflN8" \
           --header "Content-Type: application/json" \
-          --data '{"cause": "Triggered by GitHub Actions"}' 
+          --data '{"cause": "Triggered via API"}' 
