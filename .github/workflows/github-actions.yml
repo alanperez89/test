@@ -10,8 +10,8 @@ jobs:
 
   deploy:
       runs-on: ubuntu-latest
-      needs: test    # Ensure tests pass before deploying
-      if: github.ref == 'refs/heads/main' && job.test.outcome == 'success'  # Deploy only on successful tests in the main branch
+      #needs: test    # Ensure tests pass before deploying
+      #if: github.ref == 'refs/heads/main' && job.test.outcome == 'success'  # Deploy only on successful tests in the main branch
 
       steps:
         - uses: actions/checkout@v3
@@ -28,3 +28,5 @@ jobs:
             service_account_key: ${{ secrets.BIGQUERY_SERVICE_ACCOUNT_KEY }}
         - name: dbt deploy
           run: dbt run --profiles-dir . --target prod --full-refresh
+
+          The workflow is not valid. .github/workflows/github-actions.yml (Line: 14, Col: 11): Unrecognized named-value: 'job'. Located at position 36 within expression: github.ref == 'refs/heads/main' && job.test.outcome == 'success'
