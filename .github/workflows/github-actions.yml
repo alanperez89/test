@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Get dbt Cloud job run and return the status
         id: get_job_run
-        uses: stevedow99/dbt-cloud-get-job-run-action@v1.0
+        uses: alanperez89/dbt-cloud-get-job-run-action@v1.0
         with:
           dbt_cloud_token: ${{ secrets.DBT_CLOUD_TOKEN }}
           dbt_cloud_account_id: ${{ secrets.DBT_CLOUD_ACCOUNT_ID }}
