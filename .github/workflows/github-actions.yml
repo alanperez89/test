@@ -14,23 +14,20 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  Explore-GitHub-Actions:
+  dbt_cloud_run:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "This job's status is ${{ job.status }}."
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-  # This workflow contains a single job called "retrieve_dbt_cloud_job_status"
-  retrieve_dbt_cloud_job_run_status:
-  
-    # The type of runner that the job will run on6 jkljk
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - name: Get dbt Cloud job run and return the status
-        id: get_job_run
+      - name: Authenticate with dbt Cloud
+        uses: dbt-labs/dbt-cloud-auth@v2.0.0
         with:
-          dbt_cloud_token: ${{ secrets.DBT_CLOUD_TOKEN }}
+          dbt_cloud_api_token: ${{ secrets.DBT_CLOUD_API_TOKEN }}
           dbt_cloud_account_id: ${{ secrets.DBT_CLOUD_ACCOUNT_ID }}
-          dbt_cloud_job_id: ${{ secrets.DBT_CLOUD_JOB_ID }}
+
+      - name: Trigger dbt Cloud Job
+        uses: dbt-labs/run-dbt-cloud-job@v2.0.0
+        with:
+          dbt_cloud_job_id: ${{ secrets.DBT_CLOUD_JOB_ID }}  # Job ID from dbt Cloud
+          wait_for_job_completion: true
