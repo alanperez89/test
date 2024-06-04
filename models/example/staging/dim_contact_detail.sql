@@ -9,7 +9,6 @@ data_transform AS (
         day
     FROM
         data_raw
-    WHERE day BETWEEN 1 AND 31
 ),
 
 final AS (
