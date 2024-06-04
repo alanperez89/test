@@ -24,7 +24,7 @@ data_transform AS (                               -- se construye la tabla stagi
         raw.pdays,
         raw.previous
         
-    FROM
+    FROM 
         data_raw as raw
         LEFT JOIN data_contact as contact ON contact.contact = raw.contact AND contact.month = raw.month AND contact.day = raw.day
         LEFT JOIN data_customer as customer ON customer.job = raw.job AND customer.marital = raw.marital AND customer.education = raw.education AND customer.poutcome = raw.poutcome
