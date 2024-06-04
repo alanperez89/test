@@ -22,6 +22,10 @@ data_transform AS (
     , case when mark.housing=true then 1 else 0 end as housing
     , case when loan = true then 1 else 0 end as loan
     , sub
+    ,duration
+    ,pdays
+    ,poutcome
+    
   FROM data_staging_bank_marketing mark
   JOIN data_contact prof ON prof.contact_details_id = mark.contact_details_id
   JOIN data_customer det ON det.customer_profile_id = mark.customer_profile_id
