@@ -1,7 +1,7 @@
 WITH data_raw AS (
     SELECT * FROM {{ref('raw_bank_marketing')}}
 ),
- 
+
 data_contact AS (
     SELECT * FROM {{ref('dim_contact_detail')}}
 ),
@@ -15,13 +15,6 @@ data_transform AS (
         contact.contact_details_id,
         customer.customer_profile_id,
         raw.age,
-        customer.job,
-        customer.marital,
-        customer.education,
-        customer.poutcome,
-        contact.contact,
-        contact.month,
-        contact.day,
         raw.default,
         raw.balance,
         raw.housing,
