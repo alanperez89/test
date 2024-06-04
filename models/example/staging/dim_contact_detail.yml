@@ -1,0 +1,33 @@
+version: 2
+
+models:
+    - name: dim_contact_detail
+      description: "Modelo que agrupa la informacion del contacto al usuario"
+      columns:
+          - name: contact_details_id
+            description: "Llave primaria generada"
+            tests:
+                - unique
+                - not_null
+          
+          - name: contact
+            description: "Forma de contacto para la encuesta"
+            tests:  
+                - accepted_values: 
+                    values: ['cellular', 'telephone', 'unknown']
+                - not_null
+
+          - name: month
+            description: "Mes del contacto"
+            tests:  
+                - accepted_values: 
+                    values: ['jan', 'feb', 'apr', 'mar','may','jun','jul','aug','sep','oct','nov','dec']
+                - not_null
+
+          - name: day
+            description: "Dia del contacto"
+            tests:  
+                - dbt_expectations.expect_column_values_to_be_between: 
+                    min_value: 1
+                    max_value: 31
+                - not_null
