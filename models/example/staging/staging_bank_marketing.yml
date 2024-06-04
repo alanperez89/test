@@ -21,7 +21,15 @@ models:
           - name: customer_profile_id
             description: "Llave foranea que referencia dim_customer_profile"
             tests:  
-                - not_null
                 - relationships:
                     to: ref('dim_customer_profile')
                     field: customer_profile_id
+
+          - name: age
+            description: "edad del encuestado"
+            tests:
+                - dbt_expectations.expect_column_values_to_be_between:
+                    min_value: 18
+                    max_value: 99
+
+

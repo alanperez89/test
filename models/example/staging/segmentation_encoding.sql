@@ -12,7 +12,7 @@ data_customer AS (
 
 data_transform AS (
    SELECT
-    survey_id
+    survey_id,
     age,
     balance
     , campaign
