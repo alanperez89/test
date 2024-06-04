@@ -7,9 +7,12 @@ data_transform AS (
         DISTINCT job,
         marital,
         education,
-        poutcome
+        poutcome,
+        y
     FROM
         data_raw
+    WHERE
+     y IS NOT NULL
 ),
 
 final AS (
