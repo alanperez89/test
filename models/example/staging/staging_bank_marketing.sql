@@ -1,7 +1,7 @@
 WITH data_raw AS (
     SELECT * FROM {{ref('raw_bank_marketing')}}
 ),
-
+ 
 data_contact AS (
     SELECT * FROM {{ref('dim_contact_detail')}}
 ),
