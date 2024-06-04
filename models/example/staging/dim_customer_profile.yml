@@ -38,9 +38,3 @@ models:
                     values: ['unknown','other','failure', 'success']
                 - not_null
 
-          - name: sub
-            description: "Resultado de las campañas de marketing anteriores"
-            tests:  
-                - accepted_values: 
-                    values: [true, false]
-                - not_null
