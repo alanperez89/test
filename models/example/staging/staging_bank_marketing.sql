@@ -1,16 +1,16 @@
 WITH data_raw AS (
-    SELECT * FROM {{ref('raw_bank_marketing')}}
+    SELECT * FROM {{ref('raw_bank_marketing')}} --importar raw data
 ),
 
 data_contact AS (
-    SELECT * FROM {{ref('dim_contact_detail')}}
+    SELECT * FROM {{ref('dim_contact_detail')}} -- importar dim_contact_detail
 ),
 
 data_customer AS (
-    SELECT * FROM {{ref('dim_customer_profile')}}
+    SELECT * FROM {{ref('dim_customer_profile')}} -- importar dim_customer_profile
 ),
 
-data_transform AS (
+data_transform AS (                               -- se construye la tabla staging_bank_marketing
     SELECT
         contact.contact_details_id,
         customer.customer_profile_id,
@@ -30,7 +30,7 @@ data_transform AS (
         LEFT JOIN data_customer as customer ON customer.job = raw.job AND customer.marital = raw.marital AND customer.education = raw.education AND customer.poutcome = raw.poutcome
 ),
 
-final AS (
+final AS (                                      -- se agrega una PK
     SELECT
         GENERATE_UUID() as survey_id,
         * 
@@ -38,4 +38,4 @@ final AS (
         data_transform
 )
 
-SELECT * FROM final
+SELECT * FROM final                         -- select final

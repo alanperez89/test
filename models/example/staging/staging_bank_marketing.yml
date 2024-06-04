@@ -1,0 +1,27 @@
+version: 2
+
+models:
+    - name: staging_bank_marketing
+      description: "Modelo que agrupa la informacion del las encuestas realizadas"
+      columns:
+          - name: survey_id
+            description: "Llave primaria generada"
+            tests:
+                - unique
+                - not_null
+          
+          - name: contact_details_id
+            description: "Llave foranea que referencia dim_contact_detail"
+            tests:  
+                - not_null
+                - relationships:
+                    to: ref('dim_contact_detail')
+                    field: contact_details_id
+
+          - name: customer_profile_id
+            description: "Llave foranea que referencia dim_customer_profile"
+            tests:  
+                - not_null
+                - relationships:
+                    to: ref('dim_customer_profile')
+                    field: customer_profile_id
