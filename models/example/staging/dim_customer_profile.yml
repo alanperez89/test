@@ -32,8 +32,9 @@ models:
                 - not_null
 
           - name: poutcome
-            description: "Resultado de las campañas de marketing anteriores"
+            description: "Resultado de las campaña previa de marketing anteriores"
             tests:  
                 - accepted_values: 
                     values: ['unknown','other','failure', 'success']
                 - not_null
+
