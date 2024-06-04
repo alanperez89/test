@@ -1,9 +1,11 @@
 WITH raw_data AS (
-    Select  * from Rawdata.raw_bank_marketing
+    Select * 
+    FROM Rawdata.raw_bank_marketing
 ),
 
 final as (
-    SELECT * FROM raw_data)
+    SELECT * 
+    FROM raw_data)
 
 SELECT * FROM final
     
