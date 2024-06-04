@@ -25,6 +25,6 @@ final AS (                                               -- se genera un PK
         data_transform 
 )
 
-SELECT * FROM final         -- select final
+SELECT * FROM final         -- select final 
 
 
