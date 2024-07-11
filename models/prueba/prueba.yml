@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: rawdataperezaguirre
+    schema: prueba123
+    database: rawdataperezaguirre 
+    tables:
+
+      - name: prueba1234
+        identifier: prueba1234
